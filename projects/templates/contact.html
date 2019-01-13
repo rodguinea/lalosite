@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+{% load static %}
+{% load static i18n %}
+
+{% block css %}
+    <style>
+        input {
+            width: 100%;
+            outline: none;
+            font-family: "Arial";
+        }
+        form {
+            padding-bottom: 16px; border-radius: 0px 0px 25px 25px;
+        }
+        form .row {
+            margin: 0 10px;
+        }
+        .header div{
+
+            border-bottom: 3px solid white;
+        }
+        .header div, form .col-md-12 {
+            padding: 8px !important;
+        }
+        p{
+            margin-bottom: 0.5rem;
+        }
+        form {
+            margin: 0 20px;
+            background: black;
+            color: white;
+            text-align: center;
+            font-family: "AtlanticCruise"
+        }
+        textarea {
+            width: 100%;
+            resize: none;
+            outline: none;
+            font-family: "Arial";
+        }
+        #btn_submit {
+            background: transparent;
+            color: white;
+            border: none;
+            height: 100%;
+            cursor: pointer;
+            padding: 10px 0px;
+        }
+        #contact {
+            margin: 0 auto;
+        }
+
+        @media (max-width: 575px) { #contact { width: 70%; } .border-right { border-right: none !important; } }
+        @media (min-width: 576px) { #contact { width: 400px; } .border-right { border-right: none !important; } }
+        @media (min-width: 768px) { #contact { width: 500px; } .border-right { border-right: 3px solid white !important; } }
+
+        .alert {
+            width: 50%;
+            margin: 20px auto;
+        }
+
+        #imdb {
+            width: 48px;
+            height: 48px;
+            position: relative;
+            left:  103.5%;
+            bottom: 21.5%
+        }
+        #datos {
+            position: relative;
+            bottom: -25%;
+        }
+
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div id="contact">
+            <img src="{% static 'image/media.png' %}">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                {{ form.source.errors }}
+                {{ form.source }}
+
+                <div class="row header">
+                    <div class="col-md-3 border-right">
+                        <p>{% trans 'NAME' %}</p>
+                        {{ form.name }}
+                    </div>
+                    <div class="col-md-5 border-right">
+                        <p>{% trans 'E-MAIL' %}</p>
+                        {{ form.from_email }}
+                    </div>
+                    <div class="col-md-4">
+                        <p>{% trans 'SUBJECT' %}</p>
+                        {{ form.affair }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12"><p style="margin-bottom: -8px; text-align: left;">{% trans 'MESSAGE' %}</p></div>
+                    <div class="col-md-12">{{ form.message }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 border-right" style="text-align: left; border-top: 3px solid white;">
+
+                            <div id="datos">lalov311@gmail.com &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; +51 995 054 016</div>
+
+                    </div>
+                    <div class="col-md-4" style="border-top: 3px solid white;"><input id="btn_submit" type="button" value="{% trans 'SEND' %}"></div>
+                </div>
+            </form>
+                    <div id="imdb"><a href="https://m.imdb.com/name/nm5318515/" target="_blank"><img src="{% static 'image/imdb.png' %}"></a><br><br><a href="https://www.linkedin.com/in/jevaldiviabrunetti/" target="_blank"><img src="{% static 'image/linkedin.png' %}"></a></div>
+        </div>
+
+    </div>
+{% endblock %}
+
+
+{% block script %}
+    <script src="{% static 'js/notify.min.js' %}"></script>
+    <script>
+        $('#btn_submit').click(function() {
+            $.ajax({
+                type: 'POST',
+                url: '',
+                data: {
+
+                    name: $('#id_name').val(),
+                    from_email: $('#id_from_email').val(),
+                    affair: $('#id_affair').val(),
+                    message: $('#id_message').val(),
+                    csrfmiddlewaretoken : $('input[name=csrfmiddlewaretoken]').val()
+                },
+                success: function(resultData) {
+                    if(resultData == 'Success') {
+                        $.notify("{% trans 'Email sent successfully!' %}", "success");
+                    }
+                    else {
+                        $.notify("{% trans 'Email sent Failed!' %}", "error");
+                    }
+                }
+            });
+        });
+
+    </script>
+{% endblock script %}
+

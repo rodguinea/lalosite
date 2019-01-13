@@ -1,0 +1,126 @@
+@font-face {
+    font-family: 'Segoe-UI';
+    src: url('../font/Segoe-UI_39958.ttf');
+}
+.font-atlantic
+{
+    font-family: "AtlanticCruise", Georgia;
+}
+.font-segoe
+{
+    font-family: 'Segoe-UI' !important;
+}
+html, body, .homepage
+{
+    height: 100%;
+    font-family: "Segoe-UI";
+    color: #707070;
+}
+li a, .logo{
+    font-family: "AtlanticCruise", Georgia !important;
+}
+a{
+    color: #707070;
+    text-decoration: none !important;
+}
+a:hover
+{
+    color: #707070;
+}
+.logo
+{
+    font-size: 9rem;
+    /* margin: 30px auto; */
+    clear: both;
+}
+.lang
+{
+    float: right;
+    font-size: 1.5rem;
+    margin-top: 20px;
+    margin-right: -20px;
+}
+.navbar{
+    box-shadow: none !important;
+}
+.main-nav
+{
+    font-size: 3rem;
+}
+.categories-nav
+{
+    font-size: 2rem;
+
+}
+.main-nav li {
+    margin-right: 20%;
+}
+.main-nav li:last-child {
+    margin-right: 0px;
+}
+.categories-nav li {
+    margin-right: 50px;
+}
+.categories-nav li:last-child {
+    margin-right: 0px;
+}
+.active{
+    text-decoration: underline !important;
+}
+img{
+    width: 100% !important;
+}
+div.image
+{
+    margin: 15px 0px;
+}
+.rgba-grey-strong
+{
+    background: #404040;
+    color: #707070;
+    font-family: "AtlanticCruise", Georgia;
+    font-size: 2rem;
+}
+.bottom-button
+{
+    margin: 25px 0px;
+    font-size: 1.5rem;
+}
+
+.job_details p{
+    font-size: 1.5rem;
+    font-family: 'Segoe-UI';
+    margin: 50px 0px;
+}
+ul
+{
+    line-height: 1;
+}
+.navbar {
+    padding: 0px;
+}
+@media (max-width: 991px) {
+    .categories-nav .navbar-nav {
+        flex-direction: column !important;
+    }
+}
+
+b,
+strong {
+  font-weight: bold!important;
+}
+
+.active{
+    text-decoration:underline;
+    font-weight: bold;
+}
+
+
+.overlay .mask:hover {
+    background-color: #ffffff40;
+}
+
+.overlay .mask:hover > p {
+    opacity: 1;
+    color: #ffffff;
+}

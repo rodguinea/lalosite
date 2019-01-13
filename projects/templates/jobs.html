@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load index %}
+{% load static i18n %}
+{% block content %}
+    <div class="row">
+        {% for category in categories %}
+
+            {% with forloop.counter0 as idx %}
+                {% if idx > 0 and idx|divisibleby:3 %}
+                    </div><div class="row">
+                    {% with idx|div:3 as rowIndex and categories|count as length %}
+                        {% if rowIndex == length|div:3 %}
+                            {% if length|mod:3 == 1 %}
+                                <div class="offset-md-4 col-md-4">
+                            {% elif length|mod:3 == 2 %}
+                                <div class="offset-md-2 col-md-4">
+                            {% else %}
+                                <div class="col-md-4">
+                            {% endif %}
+                        {% else %}
+                            <div class="col-md-4">
+                        {% endif %}
+                    {% endwith %}
+                {% else %}
+                    <div class="col-md-4">
+                {% endif %}
+            {% endwith %}
+                <div class="image view overlay">
+                    <img src="{{ category.image.url }}" category="{% trans category.category.name %}" class="img-fluid " alt="sample image">
+                    <a href="{% url 'category' category.category.id|minus:1 %}" class="mask flex-center rgba-grey-strong text-center font-segoe">
+                        <p>{% trans category.category.name %}</p>
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="text-center bottom-button" >
+        <a href="{% url 'all_projects' %}">{% trans 'View all' %}</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load index %}
+{% load static %}
+{% load static i18n %}
+{% block css %}
+<link rel='stylesheet' href="{% static 'css/style.css' %}" media='screen' />
+
+<script src="{% static 'js/blocksit.min.js' %}"></script>
+<script>
+    $(document).ready(function() {
+        $(window).load( function() {
+            responsive();
+        });
+        $(window).resize(function() {
+            responsive();
+        });
+        function responsive() {
+            if ($('.container').width() < 576)
+            {
+                col = 1;
+                // $('#container').width($('.container').width()-18);
+            }
+            else if ($('.container').width() < 768)
+            {
+                col = 2;
+                // $('#container').width($('.container').width()-38);
+            }
+            else {
+                col=3
+
+            }
+            $('#container').width($('.container').width());
+            console.log($('.container').width());
+            $('#container').BlocksIt({
+                numOfCol: col,
+                offsetX: 15,
+                offsetY: 15
+            });
+        }
+    });
+    </script>
+{% endblock %}
+{% block content %}
+<section id="wrapper">
+    <div id="container">
+        {% for project in projects %}
+        <div class="grid">
+            <div class="imgholder">
+                <a href="{% url 'project' project.id %}"><img src="{{ project.image.url }}" width="100%" /></a>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</section>
+<div class="text-center bottom-button" >
+    <a class="font-segoe" href="{{request.META.HTTP_REFERER}}">{% trans 'Back' %}</a>
+</div>
+{% endblock %}
+{% block script %}
+
+{% endblock %}

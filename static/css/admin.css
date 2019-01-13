@@ -1,0 +1,21 @@
+td input{
+    width: 90%;
+}
+td textarea {
+    width: 95%;
+}
+td select {
+    width: 100%;
+}
+td.field-order {
+    width: 80px;
+}
+td.field-is_principal {
+    width: 72px;
+}
+td.field-is_shown {
+    width: 72px;
+}
+td.field-image {
+    width: 250px;
+}

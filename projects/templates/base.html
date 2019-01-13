@@ -1,0 +1,62 @@
+{% load static i18n %} <!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Lalo</title>
+		<!-- Bootstrap core CSS -->
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+		<!-- Material Design Bootstrap -->
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.6.0/css/mdb.min.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" media="screen" href="{% static 'font/AtlanticCruise.css' %}" />
+		<link rel="stylesheet" href="{% static 'css/mainpage.css' %}" />
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		{% block css %} {% endblock %}
+	</head>
+	<body style="transform: scale(0.84,0.84) translate(0%, -10%);">
+		<div class="container" style="margin-bottom: 50px;">
+			<div><a href="{% url 'index' %}" class="lang">{% trans 'Languages' %} </a></div>
+			<div class="text-center logo">{% trans 'Lalo Valdivia' %}</div><br>
+			<div class="row main-nav">
+				<nav class="navbar navbar-expand-sm">
+					<!-- Links -->
+					<ul class="navbar-nav">
+						<li class="nav-item {% if request.resolver_match.url_name == "bio" %}active{% endif %}"><a class="nav-link" href="{% url 'bio' %}">{% trans 'BIO' %}</a></li>
+						<li class="nav-item"><a class="nav-link" href="{% url 'jobs' %}">{% trans 'PROJECTS' %}</a></li>
+						<li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">{% trans 'CONTACT' %}</a></li>
+					</ul>
+				</nav>
+			</div>
+			<div class="row categories-nav">
+				<nav class="navbar navbar-expand-sm">
+					<!-- Links -->
+					<ul class="navbar-nav">
+						<li class="nav-item"><a class="nav-link" href="{% url 'category' '0' %}">{% trans 'INSTITUTIONAL' %}</a></li>
+						<li class="nav-item"><a class="nav-link" href="{% url 'category' '1' %}">{% trans 'FICTION / NON-FICTION' %}</a></li>
+						<li class="nav-item"><a class="nav-link" href="{% url 'category' '2' %}">{% trans 'MUSIC' %}</a></li>
+						<li class="nav-item"><a class="nav-link" href="{% url 'category' '3' %}">{% trans 'POLITICS' %}</a></li>
+						<li class="nav-item"><a class="nav-link" href="{% url 'category' '4' %}">{% trans 'ADVERTISING' %}</a></li>
+					</ul>
+				</nav>
+			</div>
+			{% block content %} {% endblock %}
+		</div>
+		<script>
+			$(document).ready(function() {
+
+				// $('a.nav-link').each(function(){
+				// 	if($(this).text() == "{{ menu }}") $(this).addClass('active')
+				// });
+				$('.main-nav').find("a.nav-link:eq({{ menu }})").addClass('active');
+
+				var category_index = "{{index}}"
+				if(category_index != '')
+				{
+					$('.categories-nav').find("a.nav-link:eq({{ index }})").addClass('active');
+				}
+			});
+		</script>
+		{% block script %} {% endblock %}
+	</body>
+</html>

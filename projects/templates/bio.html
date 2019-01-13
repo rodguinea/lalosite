@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="row">
+        <div style="font-size: 1.8rem; font-family: 'Segoe-UI'; margin:50px 25px;">
+            <img style="padding: 40px;width: auto !important; max-width: 100% !important; float: right;" src="{{ image }}" align="top">
+
+            {{ description|safe }}
+        </div>
+    </div>
+{% endblock %}

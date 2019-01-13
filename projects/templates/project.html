@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static i18n %}
+{% block content %}
+    <div class="row job_details">
+        <div class="offset-md-2 col-md-8 offset-sm-1 col-sm-10">
+            <p style="font-size: 2rem;">{{ project.title }}</p>
+
+            {% if project.is_shown %}
+            <div style="width: 80%; margin: 30px auto;"><img style="margin: 0px auto; width: 100%;" src="{{ project.image.url }}"></div>
+            {% endif %}
+
+            {% if project.video %}
+                <div style="width: 80%; margin: 30px auto;">
+                    <iframe width="100%" style="margin: 0 auto;" src="{{ project.video }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            {% endif %}
+
+            <p>{{ project.description|safe }}</p>
+        </div>
+    </div>
+    <div class="text-center bottom-button" >
+        <a class="font-segoe" href="{{request.META.HTTP_REFERER}}">{% trans 'Back' %}</a>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('iframe').height($('iframe').width() * 0.5625);
+        });
+        $(window).resize(function() {
+            $('iframe').height($('iframe').width() * 0.5625);
+        });
+    </script>
+{% endblock %}
